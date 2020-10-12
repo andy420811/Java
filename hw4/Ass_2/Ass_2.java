@@ -1,4 +1,4 @@
-public class Ass_2 {
+class Ass_2 {
     public static void main(String[] args) {
         int i = 65;
         char k = (char)i; 
