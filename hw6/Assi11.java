@@ -5,4 +5,4 @@ class Assi11{
         System.out.println(ch3[1][0] + str[0][0] + "漂亮" + "\\" + "陳" + str[1][2] + "快樂^v^");
         System.out.println(String.format("{0}{1}漂亮\\陳{2}快樂^v^", ch3[1][0],str[0][0],str[1][2]));
     }
-}
+}   
