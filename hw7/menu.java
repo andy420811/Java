@@ -11,7 +11,6 @@ public class menu {
             try {
                 while(in.hasNext()){
                     key = in.nextInt();
-                    if(key>3||key<1)break;
                     for(int j = count[key - 1]*key;j > 0; j--){
                         java.awt.Toolkit.getDefaultToolkit().beep();
                         Thread.sleep(500);
@@ -21,17 +20,17 @@ public class menu {
                     switch(key){
                         case 1:
                             for(;i>0;i--) a[key - 1] += "\t";
-                            a[key - 1] += count[key - 1] > 0?1:(count[key - 1]*1);
+                            a[key - 1] += count[key - 1] == 0?1:(count[key - 1]*1);
                             prt(a);
                             break;
                         case 2:
                             for(;i>0;i--) a[key - 1] += "\t";
-                            a[key - 1] += count[key - 1] > 0?1:(count[key - 1]*2);
+                            a[key - 1] += count[key - 1] == 0?1:(count[key - 1]*2);
                             prt(a);
                             break;
                         case 3:
                             for(;i>0;i--) a[key - 1] += "\t";
-                            a[key - 1] += count[key - 1] > 0?1:(count[key - 1]*3);
+                            a[key - 1] += count[key - 1] == 0?1:(count[key - 1]*3);
                             prt(a);
                             break;
                     }
@@ -40,6 +39,7 @@ public class menu {
                 in.close();
             } catch (Exception e) {
                 System.out.println("Please enter the number between 1~3");
+
             }
         }
     }
