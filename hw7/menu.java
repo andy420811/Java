@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.IOException;
 public class menu {
     public static void main(String[] args) throws InterruptedException {
         int key;
@@ -48,8 +49,9 @@ public class menu {
         System.out.println("2." + a[1]);
         System.out.println("3." + a[2]);
     }
-    public static void clearScreen() {  
-        System.out.print("\033[H\033[2J");
+    public static void clearScreen() throws IOException {  
+   //     System.out.print("\033[H\033[2J");
+        Runtime.getRuntime().exec("cls");
         System.out.flush();  
     }  
     
