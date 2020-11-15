@@ -49,9 +49,9 @@ public class menu {
         System.out.println("2." + a[1]);
         System.out.println("3." + a[2]);
     }
-    public static void clearScreen() throws IOException {  
+    public static void clearScreen() throws IOException, InterruptedException {  
    //     System.out.print("\033[H\033[2J");
-        Runtime.getRuntime().exec("cls");
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         System.out.flush();  
     }  
     
