@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "CodeLens (Launch) - Assi11",
+            "request": "launch",
+            "mainClass": "Assi11",
+            "projectName": "homework_3db502a7"
+        },
+        {
             "name": "Java",
             "type": "java",
             "request": "launch",
@@ -15,7 +22,7 @@
             "classpath": [
                 ".",
                 "${fileDirname}"
-            ],
+            ]
         },
         {
             "name": "Java Console App",
