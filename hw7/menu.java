@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.IOException;
 public class menu {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws IOException,InterruptedException,IllegalStateException {
         int key;
         String a[] = {"","",""};
         int count[] = {0,0,0};
@@ -37,14 +37,18 @@ public class menu {
                     count[key - 1]++;
                 }
                 in.close();
-            } catch (Exception e) {
+            } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Please enter the number between 1~3");
-
+                in.next();
+            } catch (IllegalStateException e){
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                System.out.println("Exit");
+                break;
             }
         }
     }
     public static void prt(String [] a){
-        System.out.println("\tNCKU");
+        System.out.println("\tNCKU(type ctrl+z to exit");
         System.out.println("1." + a[0]);
         System.out.println("2." + a[1]);
         System.out.println("3." + a[2]);
