@@ -1,6 +1,7 @@
+import java.io.IOException;
 import java.util.Scanner;
 public class Ass8 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         int size;
         float scale;
         Sheet sheet;
@@ -19,12 +20,18 @@ public class Ass8 {
         */
         int mode;
         sheet = new Sheet();
+        int prttype;
         while(true){
             try{
                 Scanner s = new Scanner(System.in);
-                System.out.println("Enter mode\n0:9 x 9 Sheet\n1:n x n Sheet\n2:n*scale x n Sheet\n3:dimond Sheet\nCtrl+z to Exit");
+                System.out.println("Enter mode\n0:9 x 9 Sheet\n1:n x n Sheet\n2:n*scale x n Sheet\n3:dimond Sheet\n4:separate\n5:inverse\n6:circle\n7:list\nCtrl+z to Exit");
                 mode = (int)ReadNum(s);
-                if(mode > 3){System.out.println("Enter 1~3"); continue;}
+                if(mode > 7){
+                    ClearScr();
+                    System.out.println("Enter 1~7"); 
+                    Thread.sleep(1000); 
+                    continue;
+                }
                 switch(mode){
                     case 0:
                         sheet.PrintIntSheet();
@@ -44,7 +51,29 @@ public class Ass8 {
                         sheet.PrintIntSheet();
                         break;
                     case 3:
-                        PrtDimond(sheet);
+                        System.out.println("Enter 0 for integer print or 1 for float");
+                        prttype = (int)ReadNum(s);
+                        PrtDimond(sheet,prttype);
+                        break;
+                    case 4:
+                        System.out.println("Enter 0 for integer print or 1 for float");
+                        prttype = (int)ReadNum(s);
+                        PrtSparteSheet(sheet,prttype);
+                        break;
+                    case 5:
+                        System.out.println("Enter 0 for integer print or 1 for float");
+                        prttype = (int)ReadNum(s);
+                        PrtInverseSheet(sheet,prttype);
+                        break;
+                    case 6:
+                        System.out.println("Enter 0 for integer print or 1 for float");
+                        prttype = (int)ReadNum(s);
+                        PrtCircleSheet(sheet,prttype);
+                        break;
+                    case 7:
+                        System.out.println("Enter 0 for integer print or 1 for float");
+                        prttype = (int)ReadNum(s);
+                        PrtListSheet(sheet,prttype);
                         break;
                 }
             }catch(IllegalStateException e){
@@ -54,9 +83,31 @@ public class Ass8 {
                 System.out.println("Please enter an integer");
             }
         }
+    }
+    private static void PrtSparteSheet(Sheet sheet,int prttype){
+        int Size = sheet.Size;
+        for(int i = 0;i < Size*Size;i++){
+            if (i % Size == Size/3||
+                i % Size == Size/3*2) System.out.print("||");
+            if ((i / Size == Size/3 && i % Size == 0)||
+                (i / Size == Size/3*2 && i % Size == 0)){
+                for(int j = 0;j < Size; j++) System.out.print("###########");
+                    System.out.println();
+                }
+            sheet.PrintSheetNum(i/Size, i%Size , prttype);
+            if (i%Size == Size-1) System.out.println();
+        }
+    }
+    private static void PrtInverseSheet(Sheet sheet,int prttype){
+
+    }
+    private static void PrtCircleSheet(Sheet sheet,int prttype) {
         
     }
-    private static void PrtDimond(Sheet sheet){
+    private static void PrtListSheet(Sheet sheet,int prttype) {
+        
+    }
+    private static void PrtDimond(Sheet sheet,int prttype){
         int width = sheet.Size;
         int i,j,k;
         int spare = (width - 1) / 2;
@@ -65,12 +116,12 @@ public class Ass8 {
                 System.out.print("\t\t");
             }
             for(k = 0;k < width - 2*j;k++){
-                sheet.PrintSheetNum(i, spare - i  + k);
+                sheet.PrintSheetNum(i, spare - i  + k , prttype);
             }
             System.out.println();
         }
         for(j = 0;j < width; j++){
-            sheet.PrintSheetNum(i, j);
+            sheet.PrintSheetNum(i, j , prttype);
         }
         System.out.println();
         for(i++;i < width; i++){
@@ -78,7 +129,7 @@ public class Ass8 {
                 System.out.print("\t\t");
             }
             for(k = 0;k < width - 2*j;k++){
-                sheet.PrintSheetNum(i, i - spare + k);
+                sheet.PrintSheetNum(i, i - spare + k , prttype);
             }
             System.out.println();
         }
@@ -95,6 +146,9 @@ public class Ass8 {
             }
         }
         return out;
+    }
+    private static void ClearScr() throws IOException, InterruptedException{
+        new ProcessBuilder("cmd","/c","cls");
     }
 }
 class Sheet{
@@ -152,13 +206,24 @@ class Sheet{
     public void PrintIntSheet(){
         for(int i = 0;i < Size; i++){
             for(int j = 0; j < Size; j++){
-                System.out.printf("%dX%d=%d\t",(int)numbers[i][j].Multiplier,(int)numbers[i][j].Multiplicant,(int)numbers[i][j].Quotient);
+                System.out.printf("%3dX%3d=%3d\t",(int)numbers[i][j].Multiplier,(int)numbers[i][j].Multiplicant,(int)numbers[i][j].Quotient);
             }
             System.out.println();
         }
     }
-    public void PrintSheetNum(int i,int j){
-        System.out.printf("%.2fX%.2f=%.2f\t",numbers[i][j].Multiplier,numbers[i][j].Multiplicant,numbers[i][j].Quotient);
+    /**
+     * 
+     * @param i    
+     * @param j    
+     * @param mode enter 1 to print integer number;
+     *             enter 2 to print float number
+     */
+    public void PrintSheetNum(int i,int j,int mode){
+        if(mode == 1){
+            System.out.printf("%.2fX%.2f=%.2f\t",numbers[i][j].Multiplier,numbers[i][j].Multiplicant,numbers[i][j].Quotient);
+        }else if(mode == 0){
+            System.out.printf("%3dX%3d=%3d",(int)numbers[i][j].Multiplier,(int)numbers[i][j].Multiplicant,(int)numbers[i][j].Quotient);
+        }
     }
 }
 

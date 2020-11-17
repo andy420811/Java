@@ -2,6 +2,10 @@ import java.io.*;
 import java.util.*;
 
 class Ex15_10_4 {
+    
+    /** 
+     * @param args[]
+     */
     public static void main(String args[]) {
         File f = new File(".", "Ex15_10_4.java");
         System.out.println("lastModified Second = " + f.lastModified());  

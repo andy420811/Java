@@ -1,6 +1,11 @@
 import java.io.*;
 
 class Ex12_7_2 {
+   
+   /** 
+    * @param args[]
+    * @throws Exception
+    */
    public static void main(String args[]) throws Exception  {
       if (args.length < 1) {
          System.out.println("Usage: java Ex12_7_2 [fileName]");
@@ -10,7 +15,7 @@ class Ex12_7_2 {
       String fileName = args[0];
       FileWriter fw=new FileWriter(fileName);
 
-      String line = "Test for FileWriter ´ú¸ÕFileWriter¤§¤¤¤å";
+      String line = "Test for FileWriter ï¿½ï¿½ï¿½ï¿½FileWriterï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 
       fw.write(line);
       fw.flush();

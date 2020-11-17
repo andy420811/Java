@@ -1,4 +1,8 @@
 class Ex15_5_3 {
+   
+   /** 
+    * @param args[]
+    */
    public static void main(String args[]) {
        System.out.println("isDefined('a')       = " + Character.isDefined('a'));
        System.out.println("isDigit('a')         = " + Character.isDigit('a'));

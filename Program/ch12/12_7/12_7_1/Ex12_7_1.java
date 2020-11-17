@@ -1,6 +1,11 @@
 import java.io.*;
 
 class Ex12_7_1 {
+   
+   /** 
+    * @param args[]
+    * @throws Exception
+    */
    public static void main(String args[]) throws Exception {
       int i;
 	

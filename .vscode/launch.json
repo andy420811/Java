@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Ass8",
+            "request": "launch",
+            "mainClass": "Ass8",
+            "projectName": "homework_fb352c33"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Assi11",
             "request": "launch",
             "mainClass": "Assi11",

@@ -59,7 +59,7 @@ public class menu {
     public static void clearScreen() throws IOException, InterruptedException {  
    //     System.out.print("\033[H\033[2J");
         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        System.out.flush();  
+    //    System.out.flush();  
     }  
     
 }

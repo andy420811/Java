@@ -1,5 +1,9 @@
 class Ex15_8_2 {
-    public static void main(String args[]) {
+    
+	/** 
+	 * @param args[]
+	 */
+	public static void main(String args[]) {
          String s = "abcd";
         
          StringBuffer str = new StringBuffer(s);

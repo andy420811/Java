@@ -1,6 +1,10 @@
 import java.io.*;
 
 class Ex15_10_3 {
+    
+    /** 
+     * @param args[]
+     */
     public static void main(String args[]) {
         File f = new File(".", "Ex15_10_3.java");
 

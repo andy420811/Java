@@ -1,6 +1,10 @@
 import java.util.*;
 
 class Ex15_11_2 {
+    
+    /** 
+     * @param args[]
+     */
     public static void main(String args[]) {
         Date d = new Date();
 
