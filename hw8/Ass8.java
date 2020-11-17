@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.util.Scanner;
 public class Ass8 {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws IOException,InterruptedException {
         int size;
         float scale;
         Sheet sheet;
@@ -21,15 +21,15 @@ public class Ass8 {
         int mode;
         sheet = new Sheet();
         int prttype;
-        while(true){
+        L1:while(true){
             try{
                 Scanner s = new Scanner(System.in);
                 System.out.println( "Enter mode\n0:9 x 9 Sheet\n1:n x n Sheet\n2:n*scale x n Sheet\n3:dimond Sheet\n"+
                                     "4:separate\n5:inverse\n6:circle\n7:list\n8:Clear Screen\nCtrl+z to Exit");
                 mode = (int)ReadNum(s);
-                if(mode > 7){
+                if(mode > 8&& mode < -1){
                     ClearScr();
-                    System.out.println("Enter 1~7"); 
+                    System.out.println("Enter 1~8"); 
                     Thread.sleep(1000); 
                     continue;
                 }
@@ -77,10 +77,14 @@ public class Ass8 {
                         prttype = (int)ReadNum(s);
                         PrtListSheet(sheet,prttype);
                         break;
+                    case 8:
+                        ClearScr();
+                        break;
+                    default:
+                        ClearScr();
+                        System.out.println("Exit");
+                        break L1;
                 }
-            }catch(IllegalStateException e){
-                System.out.println("Exit");
-                break;
             }catch(Exception e){
                 System.out.println("Please enter an integer");
             }
@@ -90,15 +94,16 @@ public class Ass8 {
         int Size = sheet.Size;
         for(int i = 0;i < Size*Size;i++){
             if (i % Size == Size/3||
-                i % Size == Size/3*2) System.out.print("||");
+                i % Size == Size/3*2) System.out.print("*||*");
             if ((i / Size == Size/3 && i % Size == 0)||
                 (i / Size == Size/3*2 && i % Size == 0)){
-                for(int j = 0;j < Size; j++) System.out.print("================");
+                for(int j = 0;j < Size; j++) System.out.print("=================");
                     System.out.println();
                 }
             sheet.PrintSheetNum(i/Size, i%Size , prttype);
             if (i%Size == Size-1) System.out.println();
         }
+        System.out.println();
     }
     private static void PrtInverseSheet(Sheet sheet,int prttype){
         int Size = sheet.Size;
@@ -106,6 +111,7 @@ public class Ass8 {
             if (i%Size == Size - 1) System.out.println();
             sheet.PrintSheetNum(i/Size, i%Size, prttype);
         }
+        System.out.println();
     }
     private static void PrtCircleSheet(Sheet sheet,int prttype) {
         double radius = (double)sheet.Size / 2;
@@ -122,7 +128,7 @@ public class Ass8 {
             }
             System.out.println("\n\n\n\n");
         }
-        
+        System.out.println();
     }
     private static void PrtListSheet(Sheet sheet,int prttype) {
         int Size = sheet.Size; 
@@ -130,6 +136,7 @@ public class Ass8 {
             sheet.PrintSheetNum(i/Size, i%Size, prttype);
             System.out.print("\n");
         }
+        System.out.println();
     }
     private static void PrtDimond(Sheet sheet,int prttype){
         int width = sheet.Size;
@@ -159,7 +166,7 @@ public class Ass8 {
         }
     }
     private static float ReadNum(Scanner s){
-        float out = 0;
+        float out = -1;
         while(s.hasNext()){
             try {
                 out = s.nextFloat();
@@ -167,12 +174,13 @@ public class Ass8 {
             } catch (Exception e) {
                 System.out.println("Please enter a number");
                 s.next();
+                out = -1;
             }
         }
         return out;
     }
     private static void ClearScr() throws IOException, InterruptedException{
-        new ProcessBuilder("cmd","/c","cls");
+        new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
     }
 }
 class Sheet{
@@ -245,8 +253,10 @@ class Sheet{
     public void PrintSheetNum(int i,int j,int mode){
         if(mode == 1){
             System.out.printf("%.2fX%.2f=%.2f\t",numbers[i][j].Multiplier,numbers[i][j].Multiplicant,numbers[i][j].Quotient);
+   //         if(Size > 10)System.out.print("");
         }else if(mode == 0){
             System.out.printf("%3dX%3d=%3d\t",(int)numbers[i][j].Multiplier,(int)numbers[i][j].Multiplicant,(int)numbers[i][j].Quotient);
+    //        if(Size > 10)System.out.print("");
         }
     }
 }
