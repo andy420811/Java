@@ -24,7 +24,8 @@ public class Ass8 {
         while(true){
             try{
                 Scanner s = new Scanner(System.in);
-                System.out.println("Enter mode\n0:9 x 9 Sheet\n1:n x n Sheet\n2:n*scale x n Sheet\n3:dimond Sheet\n4:separate\n5:inverse\n6:circle\n7:list\nCtrl+z to Exit");
+                System.out.println( "Enter mode\n0:9 x 9 Sheet\n1:n x n Sheet\n2:n*scale x n Sheet\n3:dimond Sheet\n"+
+                                    "4:separate\n5:inverse\n6:circle\n7:list\n8:Clear Screen\nCtrl+z to Exit");
                 mode = (int)ReadNum(s);
                 if(mode > 7){
                     ClearScr();
@@ -34,6 +35,7 @@ public class Ass8 {
                 }
                 switch(mode){
                     case 0:
+                        sheet = new Sheet();
                         sheet.PrintIntSheet();
                         break;
                     case 2:
@@ -91,7 +93,7 @@ public class Ass8 {
                 i % Size == Size/3*2) System.out.print("||");
             if ((i / Size == Size/3 && i % Size == 0)||
                 (i / Size == Size/3*2 && i % Size == 0)){
-                for(int j = 0;j < Size; j++) System.out.print("###########");
+                for(int j = 0;j < Size; j++) System.out.print("================");
                     System.out.println();
                 }
             sheet.PrintSheetNum(i/Size, i%Size , prttype);
@@ -99,13 +101,35 @@ public class Ass8 {
         }
     }
     private static void PrtInverseSheet(Sheet sheet,int prttype){
-
+        int Size = sheet.Size;
+        for (int i = Size*Size - 1;i >= 0; i--){
+            if (i%Size == Size - 1) System.out.println();
+            sheet.PrintSheetNum(i/Size, i%Size, prttype);
+        }
     }
     private static void PrtCircleSheet(Sheet sheet,int prttype) {
+        double radius = (double)sheet.Size / 2;
+        double i = radius;
+        double width;
+        int j,k;
+        for (;i > -radius;i--){
+            width = i == 0?radius:Math.floor(Math.sqrt( (radius * radius) - (i * i) ));
+            for(j = 0; j < radius - width; j++){
+                System.out.print("\t\t");
+            }
+            for(k = 0; k < width*2; k++){
+                sheet.PrintSheetNum((int)(-i+radius),(int)j + k, prttype);
+            }
+            System.out.println("\n\n\n\n");
+        }
         
     }
     private static void PrtListSheet(Sheet sheet,int prttype) {
-        
+        int Size = sheet.Size; 
+        for (int i = 0; i < Size*Size; i++){
+            sheet.PrintSheetNum(i/Size, i%Size, prttype);
+            System.out.print("\n");
+        }
     }
     private static void PrtDimond(Sheet sheet,int prttype){
         int width = sheet.Size;
@@ -222,7 +246,7 @@ class Sheet{
         if(mode == 1){
             System.out.printf("%.2fX%.2f=%.2f\t",numbers[i][j].Multiplier,numbers[i][j].Multiplicant,numbers[i][j].Quotient);
         }else if(mode == 0){
-            System.out.printf("%3dX%3d=%3d",(int)numbers[i][j].Multiplier,(int)numbers[i][j].Multiplicant,(int)numbers[i][j].Quotient);
+            System.out.printf("%3dX%3d=%3d\t",(int)numbers[i][j].Multiplier,(int)numbers[i][j].Multiplicant,(int)numbers[i][j].Quotient);
         }
     }
 }

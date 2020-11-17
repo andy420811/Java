@@ -5,20 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
-            "name": "CodeLens (Launch) - Ass8",
-            "request": "launch",
-            "mainClass": "Ass8",
-            "projectName": "homework_fb352c33"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - Assi11",
-            "request": "launch",
-            "mainClass": "Assi11",
-            "projectName": "homework_3db502a7"
-        },
-        {
             "name": "Java",
             "type": "java",
             "request": "launch",
@@ -35,6 +21,7 @@
             "name": "Java Console App",
             "type": "java",
             "request": "launch",
+            "console": "externalTerminal",
             "stopOnEntry": false,
             "jdkPath": "${env:JAVA_HOME}/bin",
             "cwd": "${fileDirname}",
