@@ -27,7 +27,7 @@ public class Ass8 {
                 System.out.println( "Enter mode\n0:9 x 9 Sheet\n1:n x n Sheet\n2:n*scale x n Sheet\n3:dimond Sheet\n"+
                                     "4:separate\n5:inverse\n6:circle\n7:list\n8:Clear Screen\nCtrl+z to Exit");
                 mode = (int)ReadNum(s);
-                if(mode > 8&& mode < -1){
+                if(mode > 8 || mode < -1){
                     ClearScr();
                     System.out.println("Enter 1~8"); 
                     Thread.sleep(1000); 
@@ -38,6 +38,12 @@ public class Ass8 {
                         sheet = new Sheet();
                         sheet.PrintIntSheet();
                         break;
+                    case 1:
+                        System.out.println("Enter the size");
+                        size = (int)ReadNum(s);
+                        sheet = new Sheet(size);
+                        sheet.PrintIntSheet();
+                        break;                    
                     case 2:
                         System.out.println("Enter the size");
                         size = (int)ReadNum(s);
@@ -45,12 +51,6 @@ public class Ass8 {
                         scale = ReadNum(s);
                         sheet = new Sheet(size,scale);
                         sheet.PrintSheet();
-                        break;
-                    case 1:
-                        System.out.println("Enter the size");
-                        size = (int)ReadNum(s);
-                        sheet = new Sheet(size);
-                        sheet.PrintIntSheet();
                         break;
                     case 3:
                         System.out.println("Enter 0 for integer print or 1 for float");
@@ -94,7 +94,7 @@ public class Ass8 {
         int Size = sheet.Size;
         for(int i = 0;i < Size*Size;i++){
             if (i % Size == Size/3||
-                i % Size == Size/3*2) System.out.print("*||*");
+                i % Size == Size/3*2) System.out.print("|");
             if ((i / Size == Size/3 && i % Size == 0)||
                 (i / Size == Size/3*2 && i % Size == 0)){
                 for(int j = 0;j < Size; j++) System.out.print("=================");
@@ -126,7 +126,7 @@ public class Ass8 {
             for(k = 0; k < width*2; k++){
                 sheet.PrintSheetNum((int)(-i+radius),(int)j + k, prttype);
             }
-            System.out.println("\n\n\n\n");
+            System.out.println("\n\n\n\n\n");
         }
         System.out.println();
     }
@@ -147,7 +147,7 @@ public class Ass8 {
                 System.out.print("\t\t");
             }
             for(k = 0;k < width - 2*j;k++){
-                sheet.PrintSheetNum(i, spare - i  + k , prttype);
+                sheet.PrintSheetNum(i, j  + k , prttype);
             }
             System.out.println();
         }
