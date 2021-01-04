@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch ass9",
+            "request": "launch",
+            "mainClass": "ass9",
+            "projectName": "homework_fb352c33"
+        },
+        {
             "name": "Java",
             "type": "java",
             "request": "launch",
